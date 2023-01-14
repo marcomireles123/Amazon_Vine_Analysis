@@ -73,3 +73,8 @@ predictor = nb.fit(training)
 # Transform the model with the testing data
 test_results = predictor.transform(testing)
 test_results.show(5)
+
+from pyspark.ml.evaluation import BinaryClassificationEvaluator
+acc_eval = BinaryClassificationEvaluator(labelCol ='label',rawPredictionCol='prediction')
+acc = acc_eval.evaluate(test_results)
+print("Accuracy of model at prediction reviews was: %f" % acc)
