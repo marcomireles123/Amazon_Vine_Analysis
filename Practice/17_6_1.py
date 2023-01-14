@@ -16,3 +16,9 @@ import findspark
 
 findspark.init()
 
+# Start Spark session
+from pyspark.sql import SparkSession
+spark = SparkSession.builder.appName("Tokens").getOrCreate()
+
+# import the Tokenizer library
+from pyspark.ml.feature import Tokenizer
