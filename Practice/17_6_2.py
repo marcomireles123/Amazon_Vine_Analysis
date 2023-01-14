@@ -21,3 +21,12 @@ from pyspark.sql import SparkSession
 spark = SparkSession.builder.appName("Tokens").getOrCreate()
 
 from pyspark.ml.feature import Tokenizer
+
+# Create DataFrame
+sentenceData = spark.createDataFrame([
+                                      (0, ["Big","data","is","super","powerful"]),
+                                      (1,["This","is","going","to","be","epic"])
+],["id","raw"])
+
+# Import stop words library
+from pyspark.ml.feature import StopWordsRemover
