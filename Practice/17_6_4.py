@@ -52,3 +52,9 @@ clean_up = VectorAssembler(inputCols=['idf_token', 'length'], outputCol='feature
 # Create and run a data processing Pipeline
 from pyspark.ml import Pipeline
 data_prep_pipeline = Pipeline(stages=[pos_neg_to_num, tokenizer, stopremove, hashingTF, idf, clean_up])
+
+# 17.6.5 Run the Model
+
+# Fit and transform the pipeline
+cleaner = data_prep_pipeline.fit(data_df)
+cleaned = cleaner.transform(data_df)
