@@ -34,3 +34,26 @@ dataframe.show()
 # Tokenize sentences
 tokenizer = Tokenizer(inputCol="sentence", outputCol="words")
 tokenizer
+
+# Transform and show DataFrame
+tokenized_df = tokenizer.transform(dataframe)
+tokenized_df.show(truncate=False)
+
+# Create a function to return the length of a list
+def word_list_length(word_list):
+    return len(word_list)
+
+from pyspark.sql.functions import col, udf
+from pyspark.sql.types import IntegerType
+
+# Create a user defined function
+count_tokens = udf(word_list_length, IntegerType())
+
+# Create our Tokenizer
+tokenizer = Tokenizer(inputCol="sentence",outputCol="words")
+
+# Transform and show DataFrame
+tokenized_df = tokenizer.transform(dataframe)
+
+# Select the needed columns and don't truncate results
+tokenized_df.withColumn("tokens",count_tokens(col("words"))).show(truncate=False)
