@@ -22,3 +22,15 @@ spark = SparkSession.builder.appName("Tokens").getOrCreate()
 
 # import the Tokenizer library
 from pyspark.ml.feature import Tokenizer
+
+# Create sample Dataframe
+dataframe = spark.createDataFrame([
+                                   (0, "Spark is great"),
+                                   (1,"We are learning Spark"),
+                                   (2, "Spark is better than hadoop no doubt")
+],["id","sentence"])
+dataframe.show()
+
+# Tokenize sentences
+tokenizer = Tokenizer(inputCol="sentence", outputCol="words")
+tokenizer
