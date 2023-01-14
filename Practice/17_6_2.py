@@ -30,3 +30,9 @@ sentenceData = spark.createDataFrame([
 
 # Import stop words library
 from pyspark.ml.feature import StopWordsRemover
+
+# Run the Remover
+remover = StopWordsRemover(inputCol="raw", outputCol="filtered")
+
+#Tansform and show data
+remover.transform(sentenceData).show(truncate=False)
