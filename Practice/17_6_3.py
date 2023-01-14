@@ -47,3 +47,11 @@ hashing = HashingTF(inputCol="filtered",outputCol="hashedValues",numFeatures=pow
 # Transform into a dataframe
 hashed_df = hashing.transform(removed_frame)
 hashed_df.show(truncate=False)
+
+# Fit the IDF on the data set
+idf = IDF(inputCol="hashedValues",outputCol='features')
+idfModel = idf.fit(hashed_df)
+rescaledData = idfModel.transform(hashed_df)
+
+# Display the DataFrame
+rescaledData.select("words","features").show(truncate=False)
