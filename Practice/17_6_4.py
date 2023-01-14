@@ -31,3 +31,24 @@ df.show()
 
 # Import functions
 from pyspark.ml.feature import Tokenizer, StopWordsRemover, HashingTF, IDF, StringIndexer
+
+from pyspark.sql.functions import length
+# Create a length column to be used as a future feature
+data_df = df.withColumn('length', length(df['text']))
+data_df.show()
+
+# Create all the features to the data set
+pos_neg_to_num = StringIndexer(inputCol='class',outputCol='label')
+tokenizer = Tokenizer(inputCol="text", outputCol="token_text")
+stopremove = StopWordsRemover(inputCol='token_text',outputCol='stop_tokens')
+hashingTF = HashingTF(inputCol="stop_tokens", outputCol='hash_token')
+idf = IDF(inputCol='hash_token', outputCol='idf_token')
+
+from pyspark.ml.feature import VectorAssembler
+from pyspark.ml.linalg import Vector
+# Create feature vectors
+clean_up = VectorAssembler(inputCols=['idf_token', 'length'], outputCol='features')
+
+# Create and run a data processing Pipeline
+from pyspark.ml import Pipeline
+data_prep_pipeline = Pipeline(stages=[pos_neg_to_num, tokenizer, stopremove, hashingTF, idf, clean_up])
