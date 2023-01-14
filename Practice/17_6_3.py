@@ -21,3 +21,12 @@ from pyspark.sql import SparkSession
 spark = SparkSession.builder.appName("TF-IDF").getOrCreate()
 
 from pyspark.ml.feature import HashingTF, IDF, Tokenizer, StopWordsRemover
+
+# Read in data from S3 Buckets
+from pyspark import SparkFiles
+url ="https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-online/v2/module_17/airlines.csv"
+spark.sparkContext.addFile(url)
+df = spark.read.csv(SparkFiles.get("airlines.csv"), sep=",", header=True)
+
+# Show DataFrame
+df.show()
