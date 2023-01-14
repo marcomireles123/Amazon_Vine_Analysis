@@ -30,3 +30,20 @@ df = spark.read.csv(SparkFiles.get("airlines.csv"), sep=",", header=True)
 
 # Show DataFrame
 df.show()
+
+# Tokenize DataFrame
+tokened = Tokenizer(inputCol="Airline Tweets", outputCol="words")
+tokened_transformed = tokened.transform(df)
+tokened_transformed.show()
+
+# Remove stop words
+remover = StopWordsRemover(inputCol="words", outputCol="filtered")
+removed_frame = remover.transform(tokened_transformed)
+removed_frame.show(truncate=False)
+
+# Run the hashing term frequency
+hashing = HashingTF(inputCol="filtered",outputCol="hashedValues",numFeatures=pow(2,18))
+
+# Transform into a dataframe
+hashed_df = hashing.transform(removed_frame)
+hashed_df.show(truncate=False)
