@@ -44,3 +44,7 @@ user_payment_df.show()
 # Join the two DataFrame
 joined_df = user_data_df.join(user_payment_df,on="username",how="inner")
 joined_df.show()
+
+# Drop null values
+dropna_df = joined_df.dropna()
+dropna_df.show()
