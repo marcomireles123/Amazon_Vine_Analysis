@@ -24,3 +24,9 @@ spark = SparkSession.builder.appName("Yelp_NLP").getOrCreate()
 
 from pyspark.sql import SparkSession
 spark = SparkSession.builder.appName("CloudETL").config("spark.driver.extraClassPath","/content/postgresql-42.2.17.jar").getOrCreate()
+
+# Read in data from S3 Buckets
+from pyspark import SparkFiles
+url ="https://marcomireles123-bucket.s3.amazonaws.com/user_data.csv"
+spark.sparkContext.addFile(url)
+user_data_df = spark.read.csv(SparkFiles.get("user_data.csv"), sep=",", header=True, inferSchema=True)
