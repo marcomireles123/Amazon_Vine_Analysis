@@ -48,3 +48,10 @@ joined_df.show()
 # Drop null values
 dropna_df = joined_df.dropna()
 dropna_df.show()
+
+# Load is a sql function to use columns
+from pyspark.sql.functions import col
+
+# Filter for only columns with active users
+cleaned_df = dropna_df.filter(col("active_user") == True)
+cleaned_df.show()
