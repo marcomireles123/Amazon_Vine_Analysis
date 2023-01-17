@@ -40,3 +40,7 @@ user_payment_df = spark.read.csv(SparkFiles.get("user_payment.csv"), sep=",", he
 
 # Show DataFrame
 user_payment_df.show()
+
+# Join the two DataFrame
+joined_df = user_data_df.join(user_payment_df,on="username",how="inner")
+joined_df.show()
