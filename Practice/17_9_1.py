@@ -15,3 +15,7 @@ os.environ["SPARK_HOME"] = f"/content/{spark_version}-bin-hadoop3"  # Start a Sp
 import findspark
 
 findspark.init()
+
+# Start Spark session
+from pyspark.sql import SparkSession
+spark = SparkSession.builder.appName("Yelp_NLP").getOrCreate()
