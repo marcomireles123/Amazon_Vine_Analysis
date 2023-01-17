@@ -19,3 +19,5 @@ findspark.init()
 # Start Spark session
 from pyspark.sql import SparkSession
 spark = SparkSession.builder.appName("Yelp_NLP").getOrCreate()
+
+!wget https://jdbc.postgresql.org/download/postgresql-42.2.17.jar
