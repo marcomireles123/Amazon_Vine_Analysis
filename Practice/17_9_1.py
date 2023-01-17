@@ -30,3 +30,6 @@ from pyspark import SparkFiles
 url ="https://marcomireles123-bucket.s3.amazonaws.com/user_data.csv"
 spark.sparkContext.addFile(url)
 user_data_df = spark.read.csv(SparkFiles.get("user_data.csv"), sep=",", header=True, inferSchema=True)
+
+# Show DataFrame
+user_data_df.show()
