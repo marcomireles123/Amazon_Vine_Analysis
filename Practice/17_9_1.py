@@ -33,3 +33,10 @@ user_data_df = spark.read.csv(SparkFiles.get("user_data.csv"), sep=",", header=T
 
 # Show DataFrame
 user_data_df.show()
+
+url ="https://marcomireles123-bucket.s3.amazonaws.com/user_payment.csv"
+spark.sparkContext.addFile(url)
+user_payment_df = spark.read.csv(SparkFiles.get("user_payment.csv"), sep=",", header=True, inferSchema=True)
+
+# Show DataFrame
+user_payment_df.show()
