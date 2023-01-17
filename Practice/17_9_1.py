@@ -55,3 +55,7 @@ from pyspark.sql.functions import col
 # Filter for only columns with active users
 cleaned_df = dropna_df.filter(col("active_user") == True)
 cleaned_df.show()
+
+# Create user dataframe to match active_user table
+clean_user_df = cleaned_df.select(["id", "first_name","last_name","username"])
+cleaned_df.show()
