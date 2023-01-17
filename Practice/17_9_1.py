@@ -63,3 +63,7 @@ cleaned_df.show()
 # Create user dataframe to match billing_info table
 clean_billing_df = cleaned_df.select(["billing_id","street_address","state","username"])
 clean_billing_df.show()
+
+# Create user dataframe to match payment_info table
+clean_payment_df = cleaned_df.select(["billing_id","cc_encrypted"])
+clean_payment_df.show()
