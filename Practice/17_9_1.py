@@ -59,3 +59,7 @@ cleaned_df.show()
 # Create user dataframe to match active_user table
 clean_user_df = cleaned_df.select(["id", "first_name","last_name","username"])
 cleaned_df.show()
+
+# Create user dataframe to match billing_info table
+clean_billing_df = cleaned_df.select(["billing_id","street_address","state","username"])
+clean_billing_df.show()
